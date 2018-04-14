@@ -15,7 +15,6 @@ import "./PasswordForget.css";
 const PasswordForgetPage = () => (
   <div className="PasswordForget">
     <PasswordForgetForm />
-    <PasswordForgetLink />
     <SignUpLink />
   </div>
 );
