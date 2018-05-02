@@ -39,22 +39,23 @@ const Navigation = props => {
   );
 };
 
-const NavigationAuth = () => (
-  <ul>
-    <li>
-      <Link to={routes.LANDING}>Landing</Link>
-    </li>
-    <li>
-      <Link to={routes.HOME}>Home</Link>
-    </li>
-    <li>
-      <Link to={routes.ACCOUNT}>Account</Link>
-    </li>
-    <li>
-      <SignOutButton />
-    </li>
-  </ul>
-);
+const NavigationAuth = props => {
+  const { classes } = props;
+  return (
+    <div className="NavigationNonAuth">
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="title" color="inherit" className={classes.flex}>
+            Firebase Full Auth
+          </Typography>
+          <Link to={routes.SIGN_IN} className="signIn">
+            <SignOutButton />
+          </Link>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+};
 
 const NavigationNonAuth = props => {
   const { classes } = props;
