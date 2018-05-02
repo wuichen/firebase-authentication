@@ -48,9 +48,7 @@ const NavigationAuth = props => {
           <Typography variant="title" color="inherit" className={classes.flex}>
             Firebase Full Auth
           </Typography>
-          <Link to={routes.SIGN_IN} className="signIn">
-            <SignOutButton />
-          </Link>
+          <SignOutButton />
         </Toolbar>
       </AppBar>
     </div>
