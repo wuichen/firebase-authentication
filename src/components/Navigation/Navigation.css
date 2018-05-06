@@ -1,4 +1,8 @@
-.NavigationNonAuth .signIn {
-  text-decoration: none;
-  color: #fff;
+.Navigation .signIn {
+    text-decoration: none;
+    color: #fff;
+}
+
+.Navigation .title {
+    flex: 1;
 }
