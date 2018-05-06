@@ -82,7 +82,7 @@ class SignUpForm extends Component {
           <div>
             <TextField
               id="username"
-              label="username"
+              label="Username"
               className="textField"
               margin="normal"
               value={username}
