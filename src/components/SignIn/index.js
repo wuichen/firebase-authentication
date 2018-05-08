@@ -12,6 +12,9 @@ import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
 import TextField from "material-ui/TextField";
 
+import googleIcon from "../../assets/google.svg";
+import githubIcon from "../../assets/github.svg";
+
 import "./SignIn.css";
 
 const SignInPage = ({ history }) => (
@@ -96,6 +99,13 @@ class SignInForm extends Component {
                 )
               }
             />
+          </div>
+          <div>
+            <div className="socialLogin">
+              <p>You can also sign in via</p>
+              <img src={googleIcon} alt="google" />
+              <img src={githubIcon} alt="github" />
+            </div>
           </div>
           <div>
             <br />
