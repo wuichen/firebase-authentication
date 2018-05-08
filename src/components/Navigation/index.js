@@ -32,7 +32,7 @@ class Navigation extends Component {
   render() {
     return (
       <div className="Navigation">
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar>
             <Typography variant="title" color="inherit" className="title">
               Firebase Full Auth
