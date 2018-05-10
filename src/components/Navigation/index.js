@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import AppBar from "material-ui/AppBar";
 import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
@@ -26,26 +26,33 @@ class Navigation extends Component {
       this.setState({
         authUser: !localStorage.getItem("authUser") && auth.currentUser().uid
       });
+    } else {
+      this.setState({
+        authUser: null
+      });
     }
   }
 
   render() {
+    const { pathname } = this.props.location;
+    const signInButton = !pathname.includes("signin") ? (
+      <Link to={routes.SIGN_IN} className="signIn">
+        <Button variant="raised" color="default">
+          Sign In
+        </Button>
+      </Link>
+    ) : null;
+
     return (
       <div className="Navigation">
         <AppBar position="fixed">
           <Toolbar>
             <Typography variant="title" color="inherit" className="title">
-              Firebase Full Auth
-            </Typography>
-            {this.state.authUser !== null ? (
-              <SignOutButton />
-            ) : (
-              <Link to={routes.SIGN_IN} className="signIn">
-                <Button variant="raised" color="default">
-                  Sign In
-                </Button>
+              <Link to={routes.LANDING} className="signIn">
+                Firebase Full Auth
               </Link>
-            )}
+            </Typography>
+            {this.state.authUser !== null ? <SignOutButton /> : signInButton}
           </Toolbar>
         </AppBar>
       </div>
@@ -53,4 +60,4 @@ class Navigation extends Component {
   }
 }
 
-export default Navigation;
+export default withRouter(props => <Navigation {...props} />);
