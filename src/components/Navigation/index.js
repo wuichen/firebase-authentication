@@ -60,4 +60,4 @@ class Navigation extends Component {
   }
 }
 
-export default withRouter(props => <Navigation {...props} />);
+export default withRouter(Navigation);
