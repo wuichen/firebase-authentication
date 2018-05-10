@@ -42,6 +42,20 @@ class SignInForm extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
+  googleSignIn = event => {
+    auth
+      .signInWithGoogle()
+      .then(result => {
+        if (result.user) {
+          this.props.history.push(routes.HOME);
+        }
+      })
+      .catch(err => {
+        this.setState(updateByPropertyName("error", err));
+      });
+    event.preventDefault();
+  };
+
   onSubmit = event => {
     const { email, password } = this.state;
 
@@ -54,7 +68,7 @@ class SignInForm extends Component {
         history.push(routes.HOME);
       })
       .catch(error => {
-        this.setState(updateByPropertyName("error", error));
+        localStorage.removeItem("authUser");
       });
 
     event.preventDefault();
@@ -103,7 +117,7 @@ class SignInForm extends Component {
           <div>
             <div className="socialLogin">
               <p>You can also sign in via</p>
-              <img src={googleIcon} alt="google" />
+              <img src={googleIcon} alt="google" onClick={this.googleSignIn} />
               <img src={githubIcon} alt="github" />
             </div>
           </div>
