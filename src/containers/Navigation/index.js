@@ -7,7 +7,7 @@ import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
 
-import SignOutButton from "../SignOut";
+import SignOutButton from "../../components/SignOut";
 import * as routes from "../../constants/routes";
 
 import "./Navigation.css";

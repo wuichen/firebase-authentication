@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
 import { SignUpLink } from "../SignUp";
-import { PasswordForgetLink } from "../PasswordForget";
+import PasswordForgetLink from "../../components/PasswordForgetLink";
 import { auth } from "../../firebase";
 import * as routes from "../../constants/routes";
 import firebaseLog from "../../assets/firebase.svg";

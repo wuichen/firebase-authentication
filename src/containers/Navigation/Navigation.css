@@ -1,0 +1,12 @@
+.Navigation {
+  height: 64px;
+}
+
+.Navigation .signIn {
+  text-decoration: none;
+  color: #fff;
+}
+
+.Navigation .title {
+  flex: 1;
+}

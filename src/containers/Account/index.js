@@ -2,12 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import { compose } from "recompose";
 
-import { PasswordForgetForm } from "../PasswordForget";
-import PasswordChangeForm from "../PasswordChange";
+import PasswordForgetForm from "../../components/PasswordForgetForm";
+import PasswordChangeForm from "../../components/PasswordChange";
 import withAuthorization from "../Session/withAuthorization";
 
+import "./AccountPage.css";
+
 const AccountPage = ({ authUser }) => (
-  <div>
+  <div className="AccountPage">
     <h1>Account: {authUser.email}</h1>
     <PasswordForgetForm />
     <PasswordChangeForm />

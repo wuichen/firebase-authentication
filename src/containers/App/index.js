@@ -9,7 +9,7 @@ import Navigation from "../Navigation";
 import LandingPage from "../Landing";
 import SignUpPage from "../SignUp";
 import SignInPage from "../SignIn";
-import PasswordForgetPage from "../PasswordForget";
+import PasswordForgetPage from "../PasswordForgetPage";
 import HomePage from "../Home";
 import AccountPage from "../Account";
 import withAuthentication from "../Session/withAuthentication";
