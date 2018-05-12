@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "recompose";
 
-import withAuthorization from "../Session/withAuthorization";
+//components
+import withAuthorization from "../../components/Session/withAuthorization";
 import { db } from "../../firebase";
 
 import "./Home.css";

@@ -4,7 +4,7 @@ import { compose } from "recompose";
 
 import PasswordForgetForm from "../../components/PasswordForgetForm";
 import PasswordChangeForm from "../../components/PasswordChange";
-import withAuthorization from "../Session/withAuthorization";
+import withAuthorization from "../../components/Session/withAuthorization";
 
 import "./AccountPage.css";
 

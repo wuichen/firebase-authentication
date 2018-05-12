@@ -12,8 +12,9 @@ import SignInPage from "../SignIn";
 import PasswordForgetPage from "../PasswordForgetPage";
 import HomePage from "../Home";
 import AccountPage from "../Account";
-import withAuthentication from "../Session/withAuthentication";
 import * as routes from "../../constants/routes";
+
+import withAuthentication from "../../components/Session/withAuthentication";
 
 import "./index.css";
 
