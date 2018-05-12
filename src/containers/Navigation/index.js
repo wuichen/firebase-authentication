@@ -11,12 +11,19 @@ import Button from "material-ui/Button";
 import SignOutButton from "../../components/SignOut";
 
 //utils
+import { auth } from "../../firebase";
 import * as routes from "../../constants/routes";
 import "./Navigation.css";
 
 class Navigation extends Component {
   render() {
     const { pathname } = this.props.location;
+
+    let hasLocalStorageUser = false;
+    if (auth.currentUser() === null) {
+      hasLocalStorageUser = localStorage.getItem("authUser") ? true : false;
+    }
+
     const signInButton = !pathname.includes("signin") ? (
       <Link to={routes.SIGN_IN} className="signIn">
         <Button variant="raised" color="default">
@@ -34,7 +41,11 @@ class Navigation extends Component {
                 Firebase Full Auth
               </Link>
             </Typography>
-            {this.props.authUser !== null ? <SignOutButton /> : signInButton}
+            {hasLocalStorageUser || this.props.authUser !== null ? (
+              <SignOutButton />
+            ) : (
+              signInButton
+            )}
           </Toolbar>
         </AppBar>
       </div>
