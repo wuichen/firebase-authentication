@@ -7,10 +7,19 @@ import SignInForm from "../../components/SignInForm";
 import PasswordForgetLink from "../../components/PasswordForgetLink";
 
 //utils
-import { auth } from "../../firebase";
+import { firebase, auth } from "../../firebase";
+import * as routes from "../../constants/routes";
 import "./SignIn.css";
 
 class SignInPage extends Component {
+  componentWillMount() {
+    firebase.auth.onAuthStateChanged(authUser => {
+      if (authUser) {
+        this.props.history.push(routes.HOME);
+      }
+    });
+  }
+
   render() {
     return (
       <div className="SignIn">

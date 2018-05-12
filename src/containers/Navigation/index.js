@@ -34,12 +34,7 @@ class Navigation extends Component {
                 Firebase Full Auth
               </Link>
             </Typography>
-            {localStorage.getItem("authUser") !== null ||
-            this.props.authUser !== null ? (
-              <SignOutButton />
-            ) : (
-              signInButton
-            )}
+            {this.props.authUser !== null ? <SignOutButton /> : signInButton}
           </Toolbar>
         </AppBar>
       </div>
