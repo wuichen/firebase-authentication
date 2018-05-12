@@ -5,6 +5,7 @@ import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
 import blue from "material-ui/colors/blue";
 import red from "material-ui/colors/red";
 
+//containers
 import Navigation from "../Navigation";
 import LandingPage from "../Landing";
 import SignUpPage from "../SignUp";
@@ -12,10 +13,12 @@ import SignInPage from "../SignIn";
 import PasswordForgetPage from "../PasswordForgetPage";
 import HomePage from "../Home";
 import AccountPage from "../Account";
-import * as routes from "../../constants/routes";
 
+//components
 import withAuthentication from "../../components/Session/withAuthentication";
 
+//utils
+import * as routes from "../../constants/routes";
 import "./index.css";
 
 const theme = createMuiTheme({

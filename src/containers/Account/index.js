@@ -2,10 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { compose } from "recompose";
 
+//components
 import PasswordForgetForm from "../../components/PasswordForgetForm";
 import PasswordChangeForm from "../../components/PasswordChange";
 import withAuthorization from "../../components/Session/withAuthorization";
 
+//utils
 import "./AccountPage.css";
 
 const AccountPage = ({ authUser }) => (

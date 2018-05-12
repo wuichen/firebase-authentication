@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { auth } from "../../firebase";
-import { SignUpLink } from "../SignUp";
 
+//components
+import SignUpLink from "../../components/SignUpLink";
 import PasswordForgetForm from "../../components/PasswordForgetForm";
 
+//utils
+import { auth } from "../../firebase";
 import "./PasswordForgetPage.css";
 
 class PasswordForgetPage extends Component {

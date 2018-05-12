@@ -4,8 +4,9 @@ import { compose } from "recompose";
 
 //components
 import withAuthorization from "../../components/Session/withAuthorization";
-import { db } from "../../firebase";
 
+//utils
+import { db } from "../../firebase";
 import "./Home.css";
 
 class HomePage extends Component {
