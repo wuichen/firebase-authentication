@@ -14,9 +14,8 @@ import "./SignIn.css";
 class SignInPage extends Component {
   componentWillMount() {
     if (auth.currentUser() === null) {
-      const hasLocalStorageUser = localStorage.getItem("authUser")
-        ? true
-        : false;
+      const hasLocalStorageUser =
+        localStorage.getItem("authUser") !== null ? true : false;
       if (hasLocalStorageUser) this.props.history.push(routes.HOME);
     }
     firebase.auth.onAuthStateChanged(authUser => {
