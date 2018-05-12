@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { compose } from "recompose";
 
 import withAuthorization from "../Session/withAuthorization";
 import { db } from "../../firebase";
@@ -15,20 +17,16 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    db
-      .onceGetUsers()
-      .then(snapshot => this.setState(() => ({ users: snapshot.val() })));
+    db.onceGetUsers().then(snapshot => this.props.onSetUsers(snapshot.val()));
   }
 
   render() {
-    const { users } = this.state;
-
     return (
       <div className="Home">
         <h1>Home</h1>
         <p>The Home Page is accessible by every signed in user.</p>
 
-        {!!users && <UserList users={users} />}
+        {!!this.props.users && <UserList users={this.props.users} />}
       </div>
     );
   }
@@ -43,6 +41,17 @@ const UserList = ({ users }) => (
   </div>
 );
 
+const mapStateToProps = state => ({
+  users: state.userState.users
+});
+
+const mapDispatchToProps = dispatch => ({
+  onSetUsers: users => dispatch({ type: "USERS_SET", users })
+});
+
 const authCondition = authUser => !!authUser;
 
-export default withAuthorization(authCondition)(HomePage);
+export default compose(
+  withAuthorization(authCondition),
+  connect(mapStateToProps, mapDispatchToProps)
+)(HomePage);

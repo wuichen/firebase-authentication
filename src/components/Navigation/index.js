@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { compose } from "recompose";
 import { Link, withRouter } from "react-router-dom";
 import AppBar from "material-ui/AppBar";
 import Toolbar from "material-ui/Toolbar";
@@ -52,7 +54,7 @@ class Navigation extends Component {
                 Firebase Full Auth
               </Link>
             </Typography>
-            {this.state.authUser !== null ? <SignOutButton /> : signInButton}
+            {this.props.authUser !== null ? <SignOutButton /> : signInButton}
           </Toolbar>
         </AppBar>
       </div>
@@ -60,4 +62,8 @@ class Navigation extends Component {
   }
 }
 
-export default withRouter(Navigation);
+const mapStateToProps = state => ({
+  authUser: state.sessionState.authUser
+});
+
+export default compose(withRouter, connect(mapStateToProps))(Navigation);
