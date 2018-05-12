@@ -8,11 +8,11 @@ const withAuthentication = Component => {
     componentDidMount() {
       firebase.auth.onAuthStateChanged(authUser => {
         if (authUser) {
-          this.props.onSetAuthUser(authUser);
           localStorage.setItem("authUser", authUser.uid);
+          this.props.onSetAuthUser(authUser);
         } else {
-          this.props.onSetAuthUser(null);
           localStorage.removeItem("authUser");
+          this.props.onSetAuthUser(null);
         }
       });
     }
