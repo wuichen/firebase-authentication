@@ -29,6 +29,13 @@ class SignUpPage extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
+  doCreateUser = (id, username, email) => {
+    return db.ref(`users/${id}`).set({
+      username,
+      email
+    });
+  };
+
   onSubmit = event => {
     const { username, email, passwordOne } = this.state;
 
@@ -38,8 +45,7 @@ class SignUpPage extends Component {
       .createUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         // Create a user in your own accessible Firebase Database too
-        db
-          .doCreateUser(authUser.uid, username, email)
+        this.doCreateUser(authUser.uid, username, email)
           .then(() => {
             this.setState(() => ({ ...INITIAL_STATE }));
             history.push(routes.HOME);

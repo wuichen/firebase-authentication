@@ -19,8 +19,12 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    db.onceGetUsers().then(snapshot => this.props.onSetUsers(snapshot.val()));
+    this.onceGetUsers().then(snapshot => this.props.onSetUsers(snapshot.val()));
   }
+
+  onceGetUsers = () => {
+    return db.ref("users").once("value");
+  };
 
   render() {
     return (

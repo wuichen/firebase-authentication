@@ -9,8 +9,8 @@ import { auth } from "../../firebase";
 import "./PasswordForgetPage.css";
 
 class PasswordForgetPage extends Component {
-  doPasswordReset = () => {
-    return auth.sendPasswordResetEmail();
+  doPasswordReset = email => {
+    return auth.sendPasswordResetEmail(email);
   };
 
   render() {
