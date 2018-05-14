@@ -15,7 +15,7 @@ import HomePage from "../Home";
 import AccountPage from "../Account";
 
 //components
-import withAuthentication from "../../components/Session/withAuthentication";
+import withAuthentication from "../Session/withAuthentication";
 
 //utils
 import * as routes from "../../constants/routes";

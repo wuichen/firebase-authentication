@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 import { compose } from "recompose";
 
 //components
-import withAuthorization from "../../components/Session/withAuthorization";
+import withAuthorization from "../Session/withAuthorization";
+
+//internals
+import { setUsers } from "./actions";
 
 //utils
 import { db } from "../../firebase";
@@ -52,7 +55,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSetUsers: users => dispatch({ type: "USERS_SET", users })
+  onSetUsers: users => dispatch(setUsers(users))
 });
 
 const authCondition = authUser => !!authUser;
