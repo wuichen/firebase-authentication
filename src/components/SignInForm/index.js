@@ -30,7 +30,7 @@ class SignInForm extends Component {
   }
 
   googleSignIn = event => {
-    this.props.auth
+    this.props
       .signInWithGoogle()
       .then(result => {
         if (result.user) {
@@ -48,7 +48,7 @@ class SignInForm extends Component {
 
     const { history } = this.props;
 
-    this.props.auth
+    this.props
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         history.push(routes.HOME);
@@ -129,7 +129,8 @@ class SignInForm extends Component {
 
 SignInForm.propTypes = {
   history: PropTypes.object,
-  auth: PropTypes.object
+  doSignInWithEmailAndPassword: PropTypes.func,
+  signInWithGoogle: PropTypes.func
 };
 
 export default SignInForm;

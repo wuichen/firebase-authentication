@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import Button from "material-ui/Button";
+import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 
 import * as routes from "../../constants/routes";
-import { auth } from "../../firebase";
 
 class SignOutButton extends Component {
   signOut = event => {
-    auth.doSignOut().then(result => {
+    this.props.doSignOut().then(result => {
       this.props.history.push(routes.SIGN_IN);
     });
   };
@@ -25,5 +25,9 @@ class SignOutButton extends Component {
     );
   }
 }
+
+SignOutButton.propTypes = {
+  doSignOut: PropTypes.func
+};
 
 export default withRouter(SignOutButton);

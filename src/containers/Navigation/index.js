@@ -16,11 +16,15 @@ import * as routes from "../../constants/routes";
 import "./Navigation.css";
 
 class Navigation extends Component {
+  doSignOut = () => {
+    return auth.signOut();
+  };
+
   render() {
     const { pathname } = this.props.location;
 
     let hasLocalStorageUser = false;
-    if (auth.currentUser() === null) {
+    if (auth.currentUser === null) {
       hasLocalStorageUser = localStorage.getItem("authUser") ? true : false;
     }
 
@@ -42,7 +46,7 @@ class Navigation extends Component {
               </Link>
             </Typography>
             {hasLocalStorageUser || this.props.authUser !== null ? (
-              <SignOutButton />
+              <SignOutButton doSignOut={this.doSignOut} />
             ) : (
               signInButton
             )}

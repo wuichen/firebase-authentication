@@ -9,10 +9,14 @@ import { auth } from "../../firebase";
 import "./PasswordForgetPage.css";
 
 class PasswordForgetPage extends Component {
+  doPasswordReset = () => {
+    return auth.sendPasswordResetEmail();
+  };
+
   render() {
     return (
       <div className="PasswordForgetPage">
-        <PasswordForgetForm doPasswordReset={auth.doPasswordReset} />
+        <PasswordForgetForm doPasswordReset={this.doPasswordReset} />
         <SignUpLink />
       </div>
     );

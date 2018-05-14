@@ -35,7 +35,7 @@ class SignUpPage extends Component {
     const { history } = this.props;
 
     auth
-      .doCreateUserWithEmailAndPassword(email, passwordOne)
+      .createUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         // Create a user in your own accessible Firebase Database too
         db

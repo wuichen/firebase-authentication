@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { firebase } from "../../firebase";
+import { auth } from "../../firebase";
 
 const withAuthentication = Component => {
   class WithAuthentication extends React.Component {
     componentWillMount() {
-      firebase.auth.onAuthStateChanged(authUser => {
+      auth.onAuthStateChanged(authUser => {
         if (authUser) {
           localStorage.setItem("authUser", authUser.uid);
           this.props.onSetAuthUser(authUser);
