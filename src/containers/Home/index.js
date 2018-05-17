@@ -6,7 +6,7 @@ import { compose } from "recompose";
 import withAuthorization from "../Session/withAuthorization";
 
 //internals
-import { setUsers } from "./actions";
+import { setUsers, setInitialState } from "./actions";
 
 //utils
 import { db, auth } from "../../firebase";
@@ -27,6 +27,11 @@ class HomePage extends Component {
         this.props.onSetUsers(snapshot.val())
       );
     }
+  }
+
+  componentWillUnmount() {
+    //perform clean-up
+    this.props.onSetInitialState();
   }
 
   onceGetUsers = () => {
@@ -59,7 +64,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSetUsers: users => dispatch(setUsers(users))
+  onSetUsers: users => dispatch(setUsers(users)),
+  onSetInitialState: () => dispatch(setInitialState())
 });
 
 const authCondition = authUser => !!authUser;
