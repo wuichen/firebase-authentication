@@ -9,7 +9,7 @@ import withAuthorization from "../Session/withAuthorization";
 import { setUsers } from "./actions";
 
 //utils
-import { db } from "../../firebase";
+import { db, auth } from "../../firebase";
 import "./Home.css";
 
 class HomePage extends Component {
@@ -22,7 +22,11 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    this.onceGetUsers().then(snapshot => this.props.onSetUsers(snapshot.val()));
+    if (auth.currentUser !== null) {
+      this.onceGetUsers().then(snapshot =>
+        this.props.onSetUsers(snapshot.val())
+      );
+    }
   }
 
   onceGetUsers = () => {
