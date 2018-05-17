@@ -10,7 +10,7 @@ import TextField from "material-ui/TextField";
 
 import firebaseLog from "../../assets/firebase.svg";
 import googleIcon from "../../assets/google.svg";
-import githubIcon from "../../assets/github.svg";
+import facebookIcon from "../../assets/facebook.svg";
 
 const INITIAL_STATE = {
   email: "",
@@ -32,6 +32,20 @@ class SignInForm extends Component {
   googleSignIn = event => {
     this.props
       .signInWithGoogle()
+      .then(result => {
+        if (result.user) {
+          this.props.history.push(routes.HOME);
+        }
+      })
+      .catch(err => {
+        this.setState(updateByPropertyName("error", err));
+      });
+    event.preventDefault();
+  };
+
+  facebookSignIn = event => {
+    this.props
+      .signInWithFacebook()
       .then(result => {
         if (result.user) {
           this.props.history.push(routes.HOME);
@@ -104,7 +118,11 @@ class SignInForm extends Component {
             <div className="socialLogin">
               <p>You can also sign in via</p>
               <img src={googleIcon} alt="google" onClick={this.googleSignIn} />
-              <img src={githubIcon} alt="github" />
+              <img
+                src={facebookIcon}
+                alt="facebook"
+                onClick={this.facebookSignIn}
+              />
             </div>
           </div>
           <div>
@@ -130,7 +148,8 @@ class SignInForm extends Component {
 SignInForm.propTypes = {
   history: PropTypes.object,
   doSignInWithEmailAndPassword: PropTypes.func,
-  signInWithGoogle: PropTypes.func
+  signInWithGoogle: PropTypes.func,
+  signInWithFacebook: PropTypes.func
 };
 
 export default SignInForm;

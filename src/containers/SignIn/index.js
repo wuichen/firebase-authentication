@@ -34,6 +34,11 @@ class SignInPage extends Component {
     return auth.signInWithPopup(provider);
   };
 
+  signInWithFacebook = () => {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    return auth.signInWithPopup(provider);
+  };
+
   render() {
     return (
       <div className="SignIn">
@@ -41,6 +46,7 @@ class SignInPage extends Component {
           history={this.props.history}
           doSignInWithEmailAndPassword={this.doSignInWithEmailAndPassword}
           signInWithGoogle={this.signInWithGoogle}
+          signInWithFacebook={this.signInWithFacebook}
         />
         <PasswordForgetLink />
         <SignUpLink />
