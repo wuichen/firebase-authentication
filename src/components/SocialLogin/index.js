@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import * as routes from "../../constants/routes";
 import googleIcon from "../../assets/google.svg";
 import facebookIcon from "../../assets/facebook.svg";
+import twitterIcon from "../../assets/twitter.svg";
 import "./SocialLogin.css";
 
 class SocialLogin extends Component {
@@ -28,6 +29,11 @@ class SocialLogin extends Component {
           alt="facebook"
           onClick={this.props.signInWithFacebook}
         />
+        <img
+          src={twitterIcon}
+          alt="twitter"
+          onClick={this.props.signInWithTwitter}
+        />
       </div>
     );
   }
@@ -35,7 +41,8 @@ class SocialLogin extends Component {
 
 SocialLogin.propTypes = {
   signInWithGoogle: PropTypes.func,
-  signInWithFacebook: PropTypes.func
+  signInWithFacebook: PropTypes.func,
+  signInWithTwitter: PropTypes.func
 };
 
 export default withRouter(SocialLogin);

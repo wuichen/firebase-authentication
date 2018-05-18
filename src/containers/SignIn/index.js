@@ -92,6 +92,21 @@ class SignInPage extends Component {
     event.preventDefault();
   };
 
+  signInWithTwitter = event => {
+    const provider = new firebase.auth.TwitterAuthProvider();
+    auth
+      .signInWithPopup(provider)
+      .then(result => {
+        if (result.user) {
+          this.props.history.push(routes.HOME);
+        }
+      })
+      .catch(err => {
+        this.setState(updateByPropertyName("error", err));
+      });
+    event.preventDefault();
+  };
+
   render() {
     const { email, password, error } = this.state;
 
@@ -139,6 +154,7 @@ class SignInPage extends Component {
               <SocialLogin
                 signInWithGoogle={this.signInWithGoogle}
                 signInWithFacebook={this.signInWithFacebook}
+                signInWithTwitter={this.signInWithTwitter}
               />
             </div>
             <div>
