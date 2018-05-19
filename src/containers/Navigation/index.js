@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { compose } from "recompose";
 import { Link, withRouter } from "react-router-dom";
@@ -11,6 +12,7 @@ import Button from "material-ui/Button";
 import SignOutButton from "../../components/SignOut";
 
 //utils
+import { signOut } from "./actions";
 import { auth } from "../../firebase";
 import * as routes from "../../constants/routes";
 import "./Navigation.css";
@@ -46,7 +48,7 @@ class Navigation extends Component {
               </Link>
             </Typography>
             {hasLocalStorageUser || this.props.authUser !== null ? (
-              <SignOutButton doSignOut={this.doSignOut} />
+              <SignOutButton doSignOut={this.props.onSignOut} />
             ) : (
               signInButton
             )}
@@ -56,9 +58,19 @@ class Navigation extends Component {
     );
   }
 }
+Navigation.propTypes = {
+  onSignOut: PropTypes.func
+};
 
 const mapStateToProps = state => ({
   authUser: state.session.authUser
 });
 
-export default compose(withRouter, connect(mapStateToProps))(Navigation);
+const mapDispatchToProps = dispatch => ({
+  onSignOut: () => dispatch(signOut())
+});
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(Navigation);
