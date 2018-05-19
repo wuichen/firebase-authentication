@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { compose } from "recompose";
 import Paper from "material-ui/Paper";
 import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
@@ -10,12 +12,14 @@ import SignUpLink from "../../components/SignUpLink";
 import PasswordForgetLink from "../../components/PasswordForgetLink";
 import SocialLogin from "../../components/SocialLogin";
 
+//default
+import { signInWithGoogle, signInWithFacebook } from "./actions";
+
 //utils
 import firebase, { auth } from "../../firebase";
 import * as routes from "../../constants/routes";
-import "./SignIn.css";
-
 import firebaseLog from "../../assets/firebase.svg";
+import "./SignIn.css";
 
 const INITIAL_STATE = {
   email: "",
@@ -63,32 +67,12 @@ class SignInPage extends Component {
   };
 
   signInWithGoogle = event => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth
-      .signInWithPopup(provider)
-      .then(result => {
-        if (result.user) {
-          this.props.history.push(routes.HOME);
-        }
-      })
-      .catch(err => {
-        this.setState(updateByPropertyName("error", err));
-      });
+    this.props.onSignInWithGoogle();
     event.preventDefault();
   };
 
   signInWithFacebook = event => {
-    const provider = new firebase.auth.FacebookAuthProvider();
-    auth
-      .signInWithPopup(provider)
-      .then(result => {
-        if (result.user) {
-          this.props.history.push(routes.HOME);
-        }
-      })
-      .catch(err => {
-        this.setState(updateByPropertyName("error", err));
-      });
+    this.props.onSignInWithFacebook();
     event.preventDefault();
   };
 
@@ -180,4 +164,14 @@ class SignInPage extends Component {
   }
 }
 
-export default withRouter(SignInPage);
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({
+  onSignInWithGoogle: () => dispatch(signInWithGoogle()),
+  onSignInWithFacebook: () => dispatch(signInWithFacebook())
+});
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(SignInPage);
