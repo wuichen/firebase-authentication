@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "recompose";
@@ -13,10 +14,15 @@ import PasswordForgetLink from "../../components/PasswordForgetLink";
 import SocialLogin from "../../components/SocialLogin";
 
 //default
-import { signInWithGoogle, signInWithFacebook } from "./actions";
+import {
+  signIn,
+  signInWithGoogle,
+  signInWithFacebook,
+  signInWithTwitter
+} from "./actions";
 
 //utils
-import firebase, { auth } from "../../firebase";
+import { auth } from "../../firebase";
 import * as routes from "../../constants/routes";
 import firebaseLog from "../../assets/firebase.svg";
 import "./SignIn.css";
@@ -53,41 +59,7 @@ class SignInPage extends Component {
 
   doSignInWithEmailAndPassword = event => {
     const { email, password } = this.state;
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.setState(() => ({ ...INITIAL_STATE }));
-        this.props.history.push(routes.HOME);
-      })
-      .catch(error => {
-        localStorage.removeItem("authUser");
-      });
-
-    event.preventDefault();
-  };
-
-  signInWithGoogle = event => {
-    this.props.onSignInWithGoogle();
-    event.preventDefault();
-  };
-
-  signInWithFacebook = event => {
-    this.props.onSignInWithFacebook();
-    event.preventDefault();
-  };
-
-  signInWithTwitter = event => {
-    const provider = new firebase.auth.TwitterAuthProvider();
-    auth
-      .signInWithPopup(provider)
-      .then(result => {
-        if (result.user) {
-          this.props.history.push(routes.HOME);
-        }
-      })
-      .catch(err => {
-        this.setState(updateByPropertyName("error", err));
-      });
+    this.props.onSignIn(email, password);
     event.preventDefault();
   };
 
@@ -136,9 +108,9 @@ class SignInPage extends Component {
             </div>
             <div>
               <SocialLogin
-                signInWithGoogle={this.signInWithGoogle}
-                signInWithFacebook={this.signInWithFacebook}
-                signInWithTwitter={this.signInWithTwitter}
+                signInWithGoogle={this.props.onSignInWithGoogle}
+                signInWithFacebook={this.props.onSignInWithFacebook}
+                signInWithTwitter={this.props.onSignInWithTwitter}
               />
             </div>
             <div>
@@ -163,12 +135,20 @@ class SignInPage extends Component {
     );
   }
 }
+SignInPage.propTypes = {
+  onSignIn: PropTypes.func,
+  onSignInWithGoogle: PropTypes.func,
+  onSignInWithFacebook: PropTypes.func,
+  onSignInWithTwitter: PropTypes.func
+};
 
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({
+  onSignIn: (email, password) => dispatch(signIn(email, password)),
   onSignInWithGoogle: () => dispatch(signInWithGoogle()),
-  onSignInWithFacebook: () => dispatch(signInWithFacebook())
+  onSignInWithFacebook: () => dispatch(signInWithFacebook()),
+  onSignInWithTwitter: () => dispatch(signInWithTwitter())
 });
 
 export default compose(

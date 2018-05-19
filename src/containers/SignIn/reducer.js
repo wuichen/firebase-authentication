@@ -1,4 +1,7 @@
 import {
+  SIGN_IN,
+  SIGN_IN_SUCCESS,
+  SIGN_IN_FAILED,
   SIGN_IN_WITH_GOOGLE,
   SIGN_IN_WITH_GOOGLE_SUCCESS,
   SIGN_IN_WITH_GOOGLE_FAILED,
@@ -9,8 +12,14 @@ import {
 
 const INITIAL_STATE = {};
 
-function sessionReducer(state = INITIAL_STATE, action) {
+function signInReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case SIGN_IN:
+      return state;
+    case SIGN_IN_SUCCESS:
+      return state;
+    case SIGN_IN_FAILED:
+      return state;
     case SIGN_IN_WITH_GOOGLE:
       return state;
     case SIGN_IN_WITH_GOOGLE_SUCCESS:
@@ -28,4 +37,4 @@ function sessionReducer(state = INITIAL_STATE, action) {
   }
 }
 
-export default sessionReducer;
+export default signInReducer;

@@ -1,11 +1,39 @@
 import {
+  SIGN_IN,
+  SIGN_IN_SUCCESS,
+  SIGN_IN_FAILED,
   SIGN_IN_WITH_GOOGLE,
   SIGN_IN_WITH_GOOGLE_SUCCESS,
   SIGN_IN_WITH_GOOGLE_FAILED,
   SIGN_IN_WITH_FACEBOOK,
   SIGN_IN_WITH_FACEBOOK_SUCCESS,
-  SIGN_IN_WITH_FACEBOOK_FAILED
+  SIGN_IN_WITH_FACEBOOK_FAILED,
+  SIGN_IN_WITH_TWITTER,
+  SIGN_IN_WITH_TWITTER_SUCCESS,
+  SIGN_IN_WITH_TWITTER_FAILED
 } from "./constants";
+
+export function signIn(email, password) {
+  return {
+    type: SIGN_IN,
+    email,
+    password
+  };
+}
+
+export function signInSuccess(user) {
+  return {
+    type: SIGN_IN_SUCCESS,
+    user
+  };
+}
+
+export function signInFailed(err) {
+  return {
+    type: SIGN_IN_FAILED,
+    err
+  };
+}
 
 export function signInWithGoogle() {
   return {
@@ -43,6 +71,26 @@ export function signInWithFacebookSuccess(user) {
 export function signInWithFacebookFailed(err) {
   return {
     type: SIGN_IN_WITH_FACEBOOK_FAILED,
+    err
+  };
+}
+
+export function signInWithTwitter() {
+  return {
+    type: SIGN_IN_WITH_TWITTER
+  };
+}
+
+export function signInWithTwitterSuccess(user) {
+  return {
+    type: SIGN_IN_WITH_TWITTER_SUCCESS,
+    user
+  };
+}
+
+export function signInWithTwitterFailed(err) {
+  return {
+    type: SIGN_IN_WITH_TWITTER_FAILED,
     err
   };
 }
