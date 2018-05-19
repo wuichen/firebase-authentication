@@ -19,7 +19,7 @@ const AccountPage = ({ authUser }) => (
 );
 
 const mapStateToProps = state => ({
-  authUser: state.sessionState.authUser
+  authUser: state.session.authUser
 });
 
 const authCondition = authUser => !!authUser;

@@ -60,7 +60,7 @@ const UserList = ({ users }) => (
 );
 
 const mapStateToProps = state => ({
-  users: state.userState.users
+  users: state.home.users
 });
 
 const mapDispatchToProps = dispatch => ({

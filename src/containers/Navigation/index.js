@@ -58,7 +58,7 @@ class Navigation extends Component {
 }
 
 const mapStateToProps = state => ({
-  authUser: state.sessionState.authUser
+  authUser: state.session.authUser
 });
 
 export default compose(withRouter, connect(mapStateToProps))(Navigation);

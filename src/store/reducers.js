@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import sessionReducer from "./../containers/Session/reducer";
-import userReducer from "./../containers/Home/reducer";
+import homeReducer from "./../containers/Home/reducer";
 
 const rootReducer = combineReducers({
-  sessionState: sessionReducer,
-  userState: userReducer
+  session: sessionReducer,
+  home: homeReducer
 });
 
 export default rootReducer;
