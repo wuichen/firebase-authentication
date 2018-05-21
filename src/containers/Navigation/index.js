@@ -19,12 +19,6 @@ import "./Navigation.css";
 class Navigation extends Component {
   render() {
     const { pathname } = this.props.location;
-
-    let hasLocalStorageUser = false;
-    if (this.props.authUser === null) {
-      hasLocalStorageUser = localStorage.getItem("authUser") ? true : false;
-    }
-
     const signInButton = !pathname.includes("signin") ? (
       <Link to={routes.SIGN_IN} className="signIn">
         <Button variant="raised" color="default">
@@ -42,7 +36,7 @@ class Navigation extends Component {
                 Firebase Full Auth
               </Link>
             </Typography>
-            {hasLocalStorageUser || this.props.authUser !== null ? (
+            {this.props.authUser ? (
               <SignOutButton doSignOut={this.props.onSignOut} />
             ) : (
               signInButton
