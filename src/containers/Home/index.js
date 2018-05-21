@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { compose } from "recompose";
 
 //components
-import withAuthorization from "../Session/withAuthorization";
+import withAuthorization from "../../components/Session/withAuthorization";
 
 //internals
 import { setUsers, setInitialState } from "./actions";
@@ -68,9 +68,7 @@ const mapDispatchToProps = dispatch => ({
   onSetInitialState: () => dispatch(setInitialState())
 });
 
-const authCondition = authUser => !!authUser;
-
 export default compose(
-  withAuthorization(authCondition),
+  withAuthorization(),
   connect(mapStateToProps, mapDispatchToProps)
 )(HomePage);

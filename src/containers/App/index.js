@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { compose } from "recompose";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import CssBaseline from "material-ui/CssBaseline";
 import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
@@ -14,9 +16,6 @@ import PasswordForgetPage from "../PasswordForgetPage";
 import HomePage from "../Home";
 import AccountPage from "../Account";
 
-//components
-import withAuthentication from "../Session/withAuthentication";
-
 //utils
 import * as routes from "../../constants/routes";
 import "./index.css";
@@ -28,47 +27,59 @@ const theme = createMuiTheme({
   }
 });
 
-const App = () => (
-  <React.Fragment>
-    <CssBaseline />
-    <MuiThemeProvider theme={theme}>
-      <Router>
-        <div className="app">
-          <header>
-            <Navigation />
-          </header>
-          <main>
-            <Route
-              exact
-              path={routes.LANDING}
-              component={() => <LandingPage />}
-            />
-            <Route
-              exact
-              path={routes.SIGN_UP}
-              component={() => <SignUpPage />}
-            />
-            <Route
-              exact
-              path={routes.SIGN_IN}
-              component={() => <SignInPage />}
-            />
-            <Route
-              exact
-              path={routes.PASSWORD_FORGET}
-              component={() => <PasswordForgetPage />}
-            />
-            <Route exact path={routes.HOME} component={() => <HomePage />} />
-            <Route
-              exact
-              path={routes.ACCOUNT}
-              component={() => <AccountPage />}
-            />
-          </main>
-        </div>
-      </Router>
-    </MuiThemeProvider>
-  </React.Fragment>
-);
+class App extends React.Component {
+  render() {
+    return (
+      <React.Fragment>
+        <CssBaseline />
+        <MuiThemeProvider theme={theme}>
+          <Router>
+            <div className="app">
+              <header>
+                <Navigation />
+              </header>
+              <main>
+                <Route
+                  exact
+                  path={routes.LANDING}
+                  component={() => <LandingPage />}
+                />
+                <Route
+                  exact
+                  path={routes.SIGN_UP}
+                  component={() => <SignUpPage />}
+                />
+                <Route
+                  exact
+                  path={routes.SIGN_IN}
+                  component={() => <SignInPage />}
+                />
+                <Route
+                  exact
+                  path={routes.PASSWORD_FORGET}
+                  component={() => <PasswordForgetPage />}
+                />
+                <Route
+                  exact
+                  path={routes.HOME}
+                  component={() => <HomePage />}
+                />
+                <Route
+                  exact
+                  path={routes.ACCOUNT}
+                  component={() => <AccountPage />}
+                />
+              </main>
+            </div>
+          </Router>
+        </MuiThemeProvider>
+      </React.Fragment>
+    );
+  }
+}
 
-export default withAuthentication(App);
+const mapStateToProps = state => ({
+  authUser: state.app.authUser
+});
+
+export default compose(connect(mapStateToProps))(App);

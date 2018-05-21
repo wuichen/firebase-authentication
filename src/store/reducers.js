@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import sessionReducer from "./../containers/Session/reducer";
+import appReducer from "./../containers/App/reducer";
 import homeReducer from "./../containers/Home/reducer";
 
 const rootReducer = combineReducers({
-  session: sessionReducer,
+  app: appReducer,
   home: homeReducer
 });
 

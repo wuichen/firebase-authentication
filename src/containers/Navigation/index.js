@@ -13,20 +13,15 @@ import SignOutButton from "../../components/SignOut";
 
 //utils
 import { signOut } from "./actions";
-import { auth } from "../../firebase";
 import * as routes from "../../constants/routes";
 import "./Navigation.css";
 
 class Navigation extends Component {
-  doSignOut = () => {
-    return auth.signOut();
-  };
-
   render() {
     const { pathname } = this.props.location;
 
     let hasLocalStorageUser = false;
-    if (auth.currentUser === null) {
+    if (this.props.authUser === null) {
       hasLocalStorageUser = localStorage.getItem("authUser") ? true : false;
     }
 
@@ -63,7 +58,7 @@ Navigation.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  authUser: state.session.authUser
+  authUser: state.app.authUser
 });
 
 const mapDispatchToProps = dispatch => ({

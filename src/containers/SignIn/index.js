@@ -7,6 +7,7 @@ import Paper from "material-ui/Paper";
 import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
 import TextField from "material-ui/TextField";
+import { Redirect } from "react-router";
 
 //components
 import SignUpLink from "../../components/SignUpLink";
@@ -22,7 +23,6 @@ import {
 } from "./actions";
 
 //utils
-import { auth } from "../../firebase";
 import * as routes from "../../constants/routes";
 import firebaseLog from "../../assets/firebase.svg";
 import "./SignIn.css";
@@ -40,21 +40,7 @@ const updateByPropertyName = (propertyName, value) => () => ({
 class SignInPage extends Component {
   constructor(props) {
     super(props);
-
     this.state = { ...INITIAL_STATE };
-  }
-
-  componentWillMount() {
-    if (auth.currentUser === null) {
-      const hasLocalStorageUser =
-        localStorage.getItem("authUser") !== null ? true : false;
-      if (hasLocalStorageUser) this.props.history.push(routes.HOME);
-    }
-    auth.onAuthStateChanged(authUser => {
-      if (authUser) {
-        this.props.history.push(routes.HOME);
-      }
-    });
   }
 
   doSignInWithEmailAndPassword = event => {
@@ -64,10 +50,12 @@ class SignInPage extends Component {
   };
 
   render() {
+    if (localStorage.getItem("authUser")) {
+      return <Redirect to={routes.HOME} />;
+    }
+
     const { email, password, error } = this.state;
-
     const isInvalid = password === "" || email === "";
-
     return (
       <div className="SignIn">
         <Paper elevation={4} className="paper">
@@ -135,6 +123,7 @@ class SignInPage extends Component {
     );
   }
 }
+
 SignInPage.propTypes = {
   onSignIn: PropTypes.func,
   onSignInWithGoogle: PropTypes.func,
@@ -142,7 +131,9 @@ SignInPage.propTypes = {
   onSignInWithTwitter: PropTypes.func
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  authUser: state.app.authUser
+});
 
 const mapDispatchToProps = dispatch => ({
   onSignIn: (email, password) => dispatch(signIn(email, password)),
