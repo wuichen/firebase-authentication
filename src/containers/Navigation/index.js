@@ -12,6 +12,7 @@ import Button from "material-ui/Button";
 import SignOutButton from "../../components/SignOut";
 
 //utils
+import { isUserLogin } from "../../utils/webhelper";
 import { signOut } from "./actions";
 import * as routes from "../../constants/routes";
 import "./Navigation.css";
@@ -27,6 +28,8 @@ class Navigation extends Component {
       </Link>
     ) : null;
 
+    const isLogin = isUserLogin();
+
     return (
       <div className="Navigation">
         <AppBar position="fixed">
@@ -36,7 +39,7 @@ class Navigation extends Component {
                 Firebase Full Auth
               </Link>
             </Typography>
-            {this.props.authUser ? (
+            {isLogin ? (
               <SignOutButton doSignOut={this.props.onSignOut} />
             ) : (
               signInButton

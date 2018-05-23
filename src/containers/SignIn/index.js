@@ -7,7 +7,6 @@ import Paper from "material-ui/Paper";
 import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
 import TextField from "material-ui/TextField";
-import { Redirect } from "react-router";
 
 //components
 import SignUpLink from "../../components/SignUpLink";
@@ -23,6 +22,7 @@ import {
 } from "./actions";
 
 //utils
+import { isUserLogin } from "../../utils/webhelper";
 import * as routes from "../../constants/routes";
 import firebaseLog from "../../assets/firebase.svg";
 import "./SignIn.css";
@@ -43,6 +43,10 @@ class SignInPage extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
+  componentWillMount() {
+    isUserLogin() && this.props.history.push(routes.HOME);
+  }
+
   doSignInWithEmailAndPassword = event => {
     const { email, password } = this.state;
     this.props.onSignIn(email, password);
@@ -50,10 +54,6 @@ class SignInPage extends Component {
   };
 
   render() {
-    if (localStorage.getItem("authUser")) {
-      return <Redirect to={routes.HOME} />;
-    }
-
     const { email, password, error } = this.state;
     const isInvalid = password === "" || email === "";
     return (

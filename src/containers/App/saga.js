@@ -3,6 +3,7 @@ import { put, call, take, fork } from "redux-saga/effects";
 
 //utils
 import { auth } from "../../firebase";
+import { setUserSession, removeUserSession } from "../../utils/webhelper";
 import { setAuthUser } from "./actions";
 
 function createChannel() {
@@ -23,9 +24,9 @@ function* syncUser() {
   while (true) {
     const { user } = yield take(channel);
     if (user !== null) {
-      localStorage.setItem("authUser", user.uid);
+      setUserSession(user.uid);
     } else {
-      localStorage.removeItem("authUser");
+      removeUserSession();
     }
 
     yield put(setAuthUser(user));
