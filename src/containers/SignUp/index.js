@@ -1,9 +1,14 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { compose } from "recompose";
 import { withRouter } from "react-router-dom";
 import Paper from "material-ui/Paper";
 import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
 import TextField from "material-ui/TextField";
+
+//default
+import { createUser } from "./actions";
 
 //utils
 import { auth, db } from "../../firebase";
@@ -25,16 +30,8 @@ const INITIAL_STATE = {
 class SignUpPage extends Component {
   constructor(props) {
     super(props);
-
     this.state = { ...INITIAL_STATE };
   }
-
-  doCreateUser = (id, username, email) => {
-    return db.ref(`users/${id}`).set({
-      username,
-      email
-    });
-  };
 
   onSubmit = event => {
     const { username, email, passwordOne } = this.state;
@@ -45,7 +42,8 @@ class SignUpPage extends Component {
       .createUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         // Create a user in your own accessible Firebase Database too
-        this.doCreateUser(authUser.uid, username, email)
+        this.props
+          .onCreateUser(authUser.uid, username, email)
           .then(() => {
             this.setState(() => ({ ...INITIAL_STATE }));
             history.push(routes.HOME);
@@ -160,4 +158,16 @@ class SignUpPage extends Component {
   }
 }
 
-export default withRouter(SignUpPage);
+const mapStateToProps = state => ({
+  authUser: state.app.authUser
+});
+
+const mapDispatchToProps = dispatch => ({
+  onCreateUser: (id, username, email) =>
+    dispatch(createUser(id, username, email))
+});
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(SignUpPage);
