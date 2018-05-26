@@ -1,13 +1,19 @@
 import { put, all, call, takeLatest } from "redux-saga/effects";
 
 //utils
-import { db } from "../../firebase";
+import { db, auth } from "../../firebase";
 import { CREATE_USER } from "./constants";
 import { createUserSuccess, createUserFailed } from "./actions";
 
-function* handleCreateUser({ id, username, email }) {
+function* handleCreateUser(action) {
   try {
-    const ref = db.ref(`users/${id}`);
+    const { email, username, password } = action;
+    const authUser = yield call(
+      [auth, auth.createUserWithEmailAndPassword],
+      email,
+      password
+    );
+    const ref = db.ref(`users/${authUser.id}`);
     yield call([ref, ref.set], {
       username,
       email

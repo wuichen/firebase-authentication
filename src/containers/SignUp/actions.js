@@ -4,18 +4,19 @@ import {
   CREATE_USER_FAILED
 } from "./constants";
 
-export function createUser(id, username, email) {
+export function createUser(email, username, password) {
   return {
     type: CREATE_USER,
-    id,
+    email,
     username,
-    email
+    password
   };
 }
 
-export function createUserSuccess() {
+export function createUserSuccess(authUser) {
   return {
-    type: CREATE_USER_SUCCESS
+    type: CREATE_USER_SUCCESS,
+    authUser
   };
 }
 

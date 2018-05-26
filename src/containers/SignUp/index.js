@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { compose } from "recompose";
 import { withRouter } from "react-router-dom";
@@ -11,7 +12,6 @@ import TextField from "material-ui/TextField";
 import { createUser } from "./actions";
 
 //utils
-import { auth, db } from "../../firebase";
 import * as routes from "../../constants/routes";
 import "./SignUp.css";
 
@@ -27,35 +27,21 @@ const INITIAL_STATE = {
   error: null
 };
 
-class SignUpPage extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = { ...INITIAL_STATE };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.authUser !== null) {
+      nextProps.history.push(routes.HOME);
+    }
+  }
+
   onSubmit = event => {
     const { username, email, passwordOne } = this.state;
-
-    const { history } = this.props;
-
-    auth
-      .createUserWithEmailAndPassword(email, passwordOne)
-      .then(authUser => {
-        // Create a user in your own accessible Firebase Database too
-        this.props
-          .onCreateUser(authUser.uid, username, email)
-          .then(() => {
-            this.setState(() => ({ ...INITIAL_STATE }));
-            history.push(routes.HOME);
-          })
-          .catch(error => {
-            this.setState(updateByPropertyName("error", error));
-          });
-      })
-      .catch(error => {
-        this.setState(updateByPropertyName("error", error));
-      });
-
+    this.props.onCreateUser(email, username, passwordOne);
     event.preventDefault();
   };
 
@@ -157,17 +143,20 @@ class SignUpPage extends Component {
     );
   }
 }
+SignUp.propTypes = {
+  onCreateUser: PropTypes.func
+};
 
 const mapStateToProps = state => ({
   authUser: state.app.authUser
 });
 
 const mapDispatchToProps = dispatch => ({
-  onCreateUser: (id, username, email) =>
-    dispatch(createUser(id, username, email))
+  onCreateUser: (email, username, password) =>
+    dispatch(createUser(email, username, password))
 });
 
 export default compose(
   withRouter,
   connect(mapStateToProps, mapDispatchToProps)
-)(SignUpPage);
+)(SignUp);
