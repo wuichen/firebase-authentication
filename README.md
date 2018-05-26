@@ -1,6 +1,6 @@
 # firebase-authentication
 
-Quickstart any new projects with Firebase Auth and other social media login.
+Quickstart a new Redux project using Firebase Auth and other social media login.
 
 ## Installation
 
