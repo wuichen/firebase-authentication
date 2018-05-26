@@ -1,6 +1,6 @@
 # firebase-authentication
 
-Quickstart any new project with Firebase Auth and other social media login.
+Quickstart any new projects with Firebase Auth and other social media login.
 
 ## Installation
 
