@@ -1,6 +1,6 @@
 # firebase-authentication
 
-Quickly integrate Firebase Authentication with social logins using React / Redux. This project is based on create-react-app and used material design ui.
+Quickstart any new project with Firebase Auth and other social media login.
 
 ## Installation
 
