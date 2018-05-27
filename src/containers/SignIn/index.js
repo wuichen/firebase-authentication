@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
+import { Redirect } from "react-router";
 import { connect } from "react-redux";
 import { compose } from "recompose";
 import Paper from "material-ui/Paper";
@@ -43,10 +44,6 @@ class SignInPage extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
-  componentWillMount() {
-    isUserLogin() && this.props.history.push(routes.HOME);
-  }
-
   doSignInWithEmailAndPassword = event => {
     const { email, password } = this.state;
     this.props.onSignIn(email, password);
@@ -54,6 +51,10 @@ class SignInPage extends Component {
   };
 
   render() {
+    if (isUserLogin()) {
+      return <Redirect to={routes.HOME} />;
+    }
+
     const { email, password, error } = this.state;
     const isInvalid = password === "" || email === "";
     return (
