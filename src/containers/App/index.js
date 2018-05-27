@@ -12,7 +12,7 @@ import Navigation from "../Navigation";
 import LandingPage from "../Landing";
 import SignUpPage from "../SignUp";
 import SignInPage from "../SignIn";
-import PasswordForgetPage from "../PasswordForgetPage";
+import ResetPassword from "../ResetPassword";
 import HomePage from "../Home";
 import AccountPage from "../Account";
 
@@ -45,7 +45,7 @@ class App extends React.Component {
                 <Route
                   exact
                   path={routes.PASSWORD_FORGET}
-                  component={PasswordForgetPage}
+                  component={ResetPassword}
                 />
                 <Route exact path={routes.HOME} component={HomePage} />
                 <Route exact path={routes.ACCOUNT} component={AccountPage} />

@@ -20,6 +20,7 @@ import "./Navigation.css";
 class Navigation extends Component {
   render() {
     const { pathname } = this.props.location;
+    const isLogin = isUserLogin();
     const signInButton = !pathname.includes("signin") ? (
       <Link to={routes.SIGN_IN} className="signIn">
         <Button variant="raised" color="default">
@@ -27,8 +28,6 @@ class Navigation extends Component {
         </Button>
       </Link>
     ) : null;
-
-    const isLogin = isUserLogin();
 
     return (
       <div className="Navigation">

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import Paper from "material-ui/Paper";
 import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
@@ -24,15 +25,8 @@ class PasswordForgetForm extends Component {
 
   onSubmit = event => {
     const { email } = this.state;
-    this.props
-      .doPasswordReset(email)
-      .then(() => {
-        this.setState(() => ({ ...INITIAL_STATE }));
-      })
-      .catch(error => {
-        this.setState(updateByPropertyName("error", error));
-      });
-
+    this.props.resetPassword(email);
+    this.setState(() => ({ ...INITIAL_STATE }));
     event.preventDefault();
   };
 
@@ -81,5 +75,8 @@ class PasswordForgetForm extends Component {
     );
   }
 }
+PasswordForgetForm.propTypes = {
+  resetPassword: PropTypes.func
+};
 
 export default PasswordForgetForm;
