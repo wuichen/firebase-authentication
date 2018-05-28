@@ -10,7 +10,7 @@ import { compose } from "recompose";
 import withAuthorization from "../../components/Session/withAuthorization";
 
 //utils
-import { auth } from "../../firebase";
+import { changePassword } from "./actions";
 import "./AccountPage.css";
 
 const updateByPropertyName = (propertyName, value) => () => ({
@@ -32,15 +32,8 @@ class AccountPage extends React.Component {
 
   onSubmit = event => {
     const { passwordOne } = this.state;
-    auth.currentUser
-      .updatePassword(passwordOne)
-      .then(() => {
-        this.setState(() => ({ ...INITIAL_STATE }));
-      })
-      .catch(error => {
-        this.setState(updateByPropertyName("error", error));
-      });
-
+    this.props.onChangePassword(passwordOne);
+    this.setState(() => ({ ...INITIAL_STATE }));
     event.preventDefault();
   };
 
@@ -58,7 +51,6 @@ class AccountPage extends React.Component {
             </Typography>
             <div>
               <TextField
-                id="password"
                 label="Password"
                 type="password"
                 className="textField"
@@ -74,7 +66,6 @@ class AccountPage extends React.Component {
             </div>
             <div>
               <TextField
-                id="password"
                 label="New Password"
                 type="password"
                 className="textField"
@@ -114,6 +105,11 @@ const mapStateToProps = state => ({
   authUser: state.app.authUser
 });
 
-export default compose(withAuthorization(), connect(mapStateToProps))(
-  AccountPage
-);
+const mapDispatchToProps = dispatch => ({
+  onChangePassword: password => dispatch(changePassword(password))
+});
+
+export default compose(
+  withAuthorization(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(AccountPage);
