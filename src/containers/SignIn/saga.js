@@ -1,4 +1,6 @@
 import { put, all, call, takeLatest } from "redux-saga/effects";
+import * as routes from "../../constants/routes";
+import { push } from "react-router-redux";
 
 //utils
 import firebase, { auth } from "../../firebase";
@@ -28,6 +30,7 @@ function* handleSignIn(action) {
       password
     );
     yield put(signInSuccess(result.user));
+    yield put(push(routes.HOME));
   } catch (e) {
     yield put(signInFailed(e));
   }

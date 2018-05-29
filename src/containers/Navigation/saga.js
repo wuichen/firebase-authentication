@@ -1,4 +1,6 @@
 import { put, all, call, takeLatest } from "redux-saga/effects";
+import * as routes from "../../constants/routes";
+import { push } from "react-router-redux";
 
 //utils
 import { auth } from "../../firebase";
@@ -9,6 +11,7 @@ function* handleSignOut() {
   try {
     yield call([auth, auth.signOut]);
     yield put(signOutSuccess());
+    yield put(push(routes.SIGN_IN));
   } catch (e) {
     yield put(signOutFailed(e));
   }

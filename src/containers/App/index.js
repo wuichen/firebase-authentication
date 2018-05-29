@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { compose } from "recompose";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
@@ -33,12 +33,12 @@ class App extends React.Component {
       <React.Fragment>
         <CssBaseline />
         <MuiThemeProvider theme={theme}>
-          <Router>
-            <div className="app">
-              <header>
-                <Navigation />
-              </header>
-              <main>
+          <div className="app">
+            <header>
+              <Navigation />
+            </header>
+            <main>
+              <Switch>
                 <Route exact path={routes.LANDING} component={LandingPage} />
                 <Route exact path={routes.SIGN_UP} component={SignUpPage} />
                 <Route exact path={routes.SIGN_IN} component={SignInPage} />
@@ -49,9 +49,9 @@ class App extends React.Component {
                 />
                 <Route exact path={routes.HOME} component={HomePage} />
                 <Route exact path={routes.ACCOUNT} component={AccountPage} />
-              </main>
-            </div>
-          </Router>
+              </Switch>
+            </main>
+          </div>
         </MuiThemeProvider>
       </React.Fragment>
     );
@@ -62,4 +62,4 @@ const mapStateToProps = state => ({
   authUser: state.app.authUser
 });
 
-export default compose(connect(mapStateToProps))(App);
+export default compose(withRouter, connect(mapStateToProps))(App);
