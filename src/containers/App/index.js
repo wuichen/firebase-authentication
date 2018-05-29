@@ -2,10 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { compose } from "recompose";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import CssBaseline from "material-ui/CssBaseline";
-import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
-import blue from "material-ui/colors/blue";
-import red from "material-ui/colors/red";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import blue from "@material-ui/core/colors/blue";
+import red from "@material-ui/core/colors/red";
 
 //containers
 import Navigation from "../Navigation";
