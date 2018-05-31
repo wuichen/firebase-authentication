@@ -19,7 +19,7 @@ function signInReducer(state = INITIAL_STATE, action) {
     case SIGN_IN_SUCCESS:
       return state;
     case SIGN_IN_FAILED:
-      return state;
+      return { ...state, err: action.err };
     case SIGN_IN_WITH_GOOGLE:
       return state;
     case SIGN_IN_WITH_GOOGLE_SUCCESS:

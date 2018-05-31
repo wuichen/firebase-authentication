@@ -55,7 +55,7 @@ class SignInPage extends Component {
       return <Redirect to={routes.HOME} />;
     }
 
-    const { email, password, error } = this.state;
+    const { email, password } = this.state;
     const isInvalid = password === "" || email === "";
     return (
       <div className="SignIn">
@@ -115,7 +115,9 @@ class SignInPage extends Component {
                 Sign in
               </Button>
             </div>
-            <div className="error">{error && error.message}</div>
+            <div className="error">
+              {this.props.error && this.props.error.message}
+            </div>
           </form>
         </Paper>
         <PasswordForgetLink />
@@ -129,11 +131,14 @@ SignInPage.propTypes = {
   onSignIn: PropTypes.func,
   onSignInWithGoogle: PropTypes.func,
   onSignInWithFacebook: PropTypes.func,
-  onSignInWithTwitter: PropTypes.func
+  onSignInWithTwitter: PropTypes.func,
+  authUser: PropTypes.object,
+  err: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-  authUser: state.app.authUser
+  authUser: state.app.authUser,
+  error: state.signIn.err
 });
 
 const mapDispatchToProps = dispatch => ({
