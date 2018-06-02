@@ -28,13 +28,20 @@ const theme = createMuiTheme({
 });
 
 class App extends React.Component {
+  includeNavigation = () => {
+    const { pathname } = this.props.location;
+
+    return pathname.includes(routes.SIGN_IN) ? false : true;
+  };
+
   render() {
+    const showNav = this.includeNavigation();
     return (
       <React.Fragment>
         <CssBaseline />
         <MuiThemeProvider theme={theme}>
           <div className="app">
-            <Navigation />
+            {showNav && <Navigation />}
             <main>
               <Switch>
                 <Route exact path={routes.LANDING} component={LandingPage} />
