@@ -34,9 +34,7 @@ class App extends React.Component {
         <CssBaseline />
         <MuiThemeProvider theme={theme}>
           <div className="app">
-            <header>
-              <Navigation />
-            </header>
+            <Navigation />
             <main>
               <Switch>
                 <Route exact path={routes.LANDING} component={LandingPage} />

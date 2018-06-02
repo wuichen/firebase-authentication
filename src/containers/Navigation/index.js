@@ -7,9 +7,10 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-
-//components
-import SignOutButton from "../../components/SignOut";
+import IconButton from "@material-ui/core/IconButton";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
 
 //utils
 import { isUserLogin } from "../../utils/webhelper";
@@ -18,9 +19,28 @@ import * as routes from "../../constants/routes";
 import "./Navigation.css";
 
 class Navigation extends Component {
-  render() {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      menuOpen: false,
+      anchorEl: null
+    };
+  }
+
+  handleMenu = event => {
+    this.setState({
+      menuOpen: true,
+      anchorEl: event.currentTarget
+    });
+  };
+
+  handleClose = () => {
+    this.setState({ menuOpen: false, anchorEl: null });
+  };
+
+  renderSignIn = () => {
     const { pathname } = this.props.location;
-    const isLogin = isUserLogin();
     const signInButton = !pathname.includes("signin") ? (
       <Link to={routes.SIGN_IN} className="signIn">
         <Button variant="raised" color="default">
@@ -28,24 +48,49 @@ class Navigation extends Component {
         </Button>
       </Link>
     ) : null;
+    return signInButton;
+  };
 
+  renderMenu = (menuOpen, anchorEl) => {
     return (
-      <div className="Navigation">
-        <AppBar position="fixed">
-          <Toolbar>
-            <Typography variant="title" color="inherit" className="title">
-              <Link to={routes.LANDING} className="signIn">
-                Firebase Full Auth
-              </Link>
-            </Typography>
-            {isLogin ? (
-              <SignOutButton doSignOut={this.props.onSignOut} />
-            ) : (
-              signInButton
-            )}
-          </Toolbar>
-        </AppBar>
+      <div>
+        <IconButton
+          aria-owns={menuOpen ? "menu-appbar" : null}
+          aria-haspopup="true"
+          onClick={this.handleMenu}
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        <Menu
+          id="menu-appbar"
+          anchorEl={anchorEl}
+          open={menuOpen}
+          onClose={this.handleClose}
+        >
+          <Link to={routes.ACCOUNT} className="links">
+            <MenuItem onClick={this.handleClose}>My account</MenuItem>
+          </Link>
+          <MenuItem onClick={this.props.onSignOut}>Sign Out</MenuItem>
+        </Menu>
       </div>
+    );
+  };
+
+  render() {
+    const { menuOpen, anchorEl } = this.state;
+    const isLogin = isUserLogin();
+    return (
+      <AppBar position="static" className="Navigation">
+        <Toolbar>
+          <Typography variant="title" color="inherit" className="title">
+            <Link to={routes.HOME} className="signIn">
+              Firebase Full Auth
+            </Link>
+          </Typography>
+          {isLogin ? this.renderMenu(menuOpen, anchorEl) : this.renderSignIn()}
+        </Toolbar>
+      </AppBar>
     );
   }
 }
