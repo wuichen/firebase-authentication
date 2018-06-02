@@ -7,19 +7,15 @@
     overflow: hidden;
 }
 
+.SignIn p {
+    margin: 0;
+    padding: 8px 0 0 0;
+}
+
 .SignIn .paper {
     height: 420px;
     min-width: 400px;
     position: relative;
-}
-
-.SignIn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
 }
 
 .SignIn form {
