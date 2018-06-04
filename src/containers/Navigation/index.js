@@ -13,7 +13,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 
 //utils
-import { isUserLogin } from "../../utils/webhelper";
 import { signOut } from "./actions";
 import * as routes from "../../constants/routes";
 import "./Navigation.css";
@@ -39,15 +38,19 @@ class Navigation extends Component {
     this.setState({ menuOpen: false, anchorEl: null });
   };
 
-  renderSignIn = () => {
+  isHomePage = () => {
     const { pathname } = this.props.location;
-    const signInButton = !pathname.includes("signin") ? (
+    return pathname.includes(routes.HOME) ? true : false;
+  };
+
+  renderSignIn = () => {
+    const signInButton = (
       <Link to={routes.SIGN_IN} className="signIn">
         <Button variant="raised" color="default">
           Sign In
         </Button>
       </Link>
-    ) : null;
+    );
     return signInButton;
   };
 
@@ -79,7 +82,7 @@ class Navigation extends Component {
 
   render() {
     const { menuOpen, anchorEl } = this.state;
-    const isLogin = isUserLogin();
+    const isHomePage = this.isHomePage();
     return (
       <AppBar position="static" className="Navigation">
         <Toolbar>
@@ -88,7 +91,9 @@ class Navigation extends Component {
               Firebase Full Auth
             </Link>
           </Typography>
-          {isLogin ? this.renderMenu(menuOpen, anchorEl) : this.renderSignIn()}
+          {isHomePage
+            ? this.renderMenu(menuOpen, anchorEl)
+            : this.renderSignIn()}
         </Toolbar>
       </AppBar>
     );

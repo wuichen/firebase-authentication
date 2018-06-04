@@ -30,8 +30,7 @@ const theme = createMuiTheme({
 class App extends React.Component {
   includeNavigation = () => {
     const { pathname } = this.props.location;
-
-    return pathname.includes(routes.SIGN_IN) ? false : true;
+    return !pathname.includes(routes.SIGN_IN) ? true : false;
   };
 
   render() {
