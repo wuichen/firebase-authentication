@@ -43,47 +43,23 @@ class Navigation extends Component {
     return pathname === routes.LANDING ? true : false;
   };
 
-  renderSignIn = () => {
-    const signInButton = (
-      <Link to={routes.SIGN_IN} className="signIn">
-        <Button variant="raised" color="default">
-          Sign In
-        </Button>
-      </Link>
-    );
-    return signInButton;
-  };
+  renderSignIn = () => (
+    <AppBar position="static" className="Navigation">
+      <Toolbar>
+        <Typography variant="title" color="inherit" className="title">
+          &nbsp;
+        </Typography>
+        <Link to={routes.SIGN_IN} className="signIn">
+          <Button variant="raised" color="default">
+            Sign In
+          </Button>
+        </Link>
+      </Toolbar>
+    </AppBar>
+  );
 
   renderMenu = (menuOpen, anchorEl) => {
-    return (
-      <div>
-        <IconButton
-          aria-owns={menuOpen ? "menu-appbar" : null}
-          aria-haspopup="true"
-          onClick={this.handleMenu}
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <Menu
-          id="menu-appbar"
-          anchorEl={anchorEl}
-          open={menuOpen}
-          onClose={this.handleClose}
-        >
-          <Link to={routes.ACCOUNT} className="links">
-            <MenuItem onClick={this.handleClose}>My account</MenuItem>
-          </Link>
-          <MenuItem onClick={this.props.onSignOut}>Sign Out</MenuItem>
-        </Menu>
-      </div>
-    );
-  };
-
-  render() {
-    const { menuOpen, anchorEl } = this.state;
-    const isLanding = this.isLandingPage();
-    return (
+    return this.props.authUser !== null ? (
       <AppBar position="static" className="Navigation">
         <Toolbar>
           <Typography variant="title" color="inherit" className="title">
@@ -91,12 +67,38 @@ class Navigation extends Component {
               Firebase Full Auth
             </Link>
           </Typography>
-          {isLanding
-            ? this.renderSignIn()
-            : this.renderMenu(menuOpen, anchorEl)}
+          <div>
+            <IconButton
+              aria-owns={menuOpen ? "menu-appbar" : null}
+              aria-haspopup="true"
+              onClick={this.handleMenu}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              open={menuOpen}
+              onClose={this.handleClose}
+            >
+              <Link to={routes.ACCOUNT} className="links">
+                <MenuItem onClick={this.handleClose}>My account</MenuItem>
+              </Link>
+              <MenuItem onClick={this.props.onSignOut}>Sign Out</MenuItem>
+            </Menu>
+          </div>
         </Toolbar>
       </AppBar>
-    );
+    ) : null;
+  };
+
+  render() {
+    const { menuOpen, anchorEl } = this.state;
+    const isLanding = this.isLandingPage();
+    return isLanding
+      ? this.renderSignIn()
+      : this.renderMenu(menuOpen, anchorEl);
   }
 }
 Navigation.propTypes = {
