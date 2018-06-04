@@ -5,7 +5,9 @@ const LOGIN_USER = "loginUser";
 export const isUserLogin = () => {
   let isLogin = false;
   if (auth.currentUser === null) {
-    isLogin = localStorage.getItem(LOGIN_USER) !== null ? true : false;
+    if (localStorage.getItem(LOGIN_USER) === null) {
+      auth.signOut();
+    }
   } else {
     isLogin = true;
   }

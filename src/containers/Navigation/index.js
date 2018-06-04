@@ -38,9 +38,9 @@ class Navigation extends Component {
     this.setState({ menuOpen: false, anchorEl: null });
   };
 
-  isHomePage = () => {
+  isLandingPage = () => {
     const { pathname } = this.props.location;
-    return pathname.includes(routes.HOME) ? true : false;
+    return pathname === routes.LANDING ? true : false;
   };
 
   renderSignIn = () => {
@@ -82,7 +82,7 @@ class Navigation extends Component {
 
   render() {
     const { menuOpen, anchorEl } = this.state;
-    const isHomePage = this.isHomePage();
+    const isLanding = this.isLandingPage();
     return (
       <AppBar position="static" className="Navigation">
         <Toolbar>
@@ -91,9 +91,9 @@ class Navigation extends Component {
               Firebase Full Auth
             </Link>
           </Typography>
-          {isHomePage
-            ? this.renderMenu(menuOpen, anchorEl)
-            : this.renderSignIn()}
+          {isLanding
+            ? this.renderSignIn()
+            : this.renderMenu(menuOpen, anchorEl)}
         </Toolbar>
       </AppBar>
     );
