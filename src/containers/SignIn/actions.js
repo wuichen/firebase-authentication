@@ -10,7 +10,8 @@ import {
   SIGN_IN_WITH_FACEBOOK_FAILED,
   SIGN_IN_WITH_TWITTER,
   SIGN_IN_WITH_TWITTER_SUCCESS,
-  SIGN_IN_WITH_TWITTER_FAILED
+  SIGN_IN_WITH_TWITTER_FAILED,
+  RESET_STATE
 } from "./constants";
 
 export function signIn(email, password) {
@@ -92,5 +93,11 @@ export function signInWithTwitterFailed(err) {
   return {
     type: SIGN_IN_WITH_TWITTER_FAILED,
     err
+  };
+}
+
+export function resetState() {
+  return {
+    type: RESET_STATE
   };
 }

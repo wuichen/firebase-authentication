@@ -7,7 +7,8 @@ import {
   SIGN_IN_WITH_GOOGLE_FAILED,
   SIGN_IN_WITH_FACEBOOK,
   SIGN_IN_WITH_FACEBOOK_SUCCESS,
-  SIGN_IN_WITH_FACEBOOK_FAILED
+  SIGN_IN_WITH_FACEBOOK_FAILED,
+  RESET_STATE
 } from "./constants";
 
 const INITIAL_STATE = {};
@@ -32,6 +33,8 @@ function signInReducer(state = INITIAL_STATE, action) {
       return state;
     case SIGN_IN_WITH_FACEBOOK_FAILED:
       return state;
+    case RESET_STATE:
+      return INITIAL_STATE;
     default:
       return state;
   }

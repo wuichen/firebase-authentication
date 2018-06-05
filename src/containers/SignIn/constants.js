@@ -19,3 +19,5 @@ export const SIGN_IN_WITH_TWITTER_SUCCESS =
   "app/SignIn/SIGN_IN_WITH_TWITTER_SUCCESS";
 export const SIGN_IN_WITH_TWITTER_FAILED =
   "app/SignIn/SIGN_IN_WITH_TWITTER_FAILED";
+
+export const RESET_STATE = "app/SignIn/RESET_STATE";

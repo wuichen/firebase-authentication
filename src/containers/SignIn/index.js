@@ -19,7 +19,8 @@ import {
   signIn,
   signInWithGoogle,
   signInWithFacebook,
-  signInWithTwitter
+  signInWithTwitter,
+  resetState
 } from "./actions";
 
 //utils
@@ -42,6 +43,10 @@ class SignInPage extends Component {
   constructor(props) {
     super(props);
     this.state = { ...INITIAL_STATE };
+  }
+
+  componentWillUnmount() {
+    this.props.onResetState();
   }
 
   doSignInWithEmailAndPassword = event => {
@@ -133,7 +138,8 @@ SignInPage.propTypes = {
   onSignInWithFacebook: PropTypes.func,
   onSignInWithTwitter: PropTypes.func,
   authUser: PropTypes.object,
-  err: PropTypes.object
+  err: PropTypes.object,
+  onResetState: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -145,10 +151,14 @@ const mapDispatchToProps = dispatch => ({
   onSignIn: (email, password) => dispatch(signIn(email, password)),
   onSignInWithGoogle: () => dispatch(signInWithGoogle()),
   onSignInWithFacebook: () => dispatch(signInWithFacebook()),
-  onSignInWithTwitter: () => dispatch(signInWithTwitter())
+  onSignInWithTwitter: () => dispatch(signInWithTwitter()),
+  onResetState: () => dispatch(resetState())
 });
 
 export default compose(
   withRouter,
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(SignInPage);
