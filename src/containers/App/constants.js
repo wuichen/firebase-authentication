@@ -1,4 +1,4 @@
-import * as routes from "../../constants/routes";
+import * as routes from "../../utils/routes";
 
 export const SET_AUTH_USER = "app/App/SET_AUTH_USER";
 

@@ -12,7 +12,7 @@ import TextField from "@material-ui/core/TextField";
 import { createUser } from "./actions";
 
 //utils
-import * as routes from "../../constants/routes";
+import * as routes from "../../utils/routes";
 import "./SignUp.css";
 
 const updateByPropertyName = (propertyName, value) => () => ({

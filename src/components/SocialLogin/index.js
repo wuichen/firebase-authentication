@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 
-import * as routes from "../../constants/routes";
+import * as routes from "../../utils/routes";
 import googleIcon from "../../assets/google.svg";
 import facebookIcon from "../../assets/facebook.svg";
 import twitterIcon from "../../assets/twitter.svg";

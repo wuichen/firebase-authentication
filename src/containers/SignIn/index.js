@@ -25,7 +25,7 @@ import {
 
 //utils
 import { isUserLogin } from "../../utils/webhelper";
-import * as routes from "../../constants/routes";
+import * as routes from "../../utils/routes";
 import firebaseLog from "../../assets/firebase.svg";
 import "./SignIn.css";
 

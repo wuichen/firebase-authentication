@@ -1,5 +1,5 @@
 import { put, all, call, takeLatest } from "redux-saga/effects";
-import * as routes from "../../constants/routes";
+import * as routes from "../../utils/routes";
 import { push } from "react-router-redux";
 
 //utils

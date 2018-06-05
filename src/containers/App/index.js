@@ -17,7 +17,7 @@ import HomePage from "../Home";
 import AccountPage from "../Account";
 
 //utils
-import * as routes from "../../constants/routes";
+import * as routes from "../../utils/routes";
 import "./index.css";
 
 const theme = createMuiTheme({

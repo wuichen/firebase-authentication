@@ -7,7 +7,7 @@ import { auth } from "../../firebase";
 import { PUBLIC_PAGES } from "./constants";
 import { setUserSession, removeUserSession } from "../../utils/webhelper";
 import { setAuthUser } from "./actions";
-import * as routes from "../../constants/routes";
+import * as routes from "../../utils/routes";
 
 export const getRoute = state => state.route;
 export const getAuthUser = state => state.app.authUser;

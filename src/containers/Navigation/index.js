@@ -14,7 +14,7 @@ import Menu from "@material-ui/core/Menu";
 
 //utils
 import { signOut } from "./actions";
-import * as routes from "../../constants/routes";
+import * as routes from "../../utils/routes";
 import "./Navigation.css";
 
 class Navigation extends Component {
