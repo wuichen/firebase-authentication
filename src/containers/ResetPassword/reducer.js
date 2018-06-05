@@ -13,7 +13,7 @@ function resetPasswordReducer(state = INITIAL_STATE, action) {
     case RESET_PASSWORD_SUCCESS:
       return state;
     case RESET_PASSWORD_FAILED:
-      return state;
+      return { ...state, err: action.err };
     default:
       return state;
   }
